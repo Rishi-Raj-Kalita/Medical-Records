@@ -11,6 +11,9 @@ const multer = require('multer')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         //console.log("in multer")
+       // const files=req.file
+        //console.log("filessss",file)
+        console.log("type",req.query)
         const userEmail = req.user.email
         const dir = `./public/uploads/${userEmail}`
         //console.log("dir",dir)
@@ -60,7 +63,7 @@ router.post('/login', authController.login_post)
 router.get('/logout', requireAuth, authController.logout_get)
 router.get('/profile', requireAuth, authController.profile_get)
 router.post(
-    '/profile/upload',
+    '/profile/upload/:type',
     requireAuth,
     upload.array('upload'),
     authController.upload_post

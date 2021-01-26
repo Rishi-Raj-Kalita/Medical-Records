@@ -175,9 +175,9 @@ module.exports.upload_post = async (req, res) => {
     try {
         
         let { name, duration, refDoctor, hospitalName, description } = req.body
-       
+       //console.log("type",req.params)
         const files = req.files
-        console.log("files",files)
+        //console.log("files",files)
         let images = files.map((file) => {
             return `/uploads/${req.user.email}/${file.filename}`
         })
@@ -196,7 +196,7 @@ module.exports.upload_post = async (req, res) => {
         req.user.disease.push(newDisease)
         await req.user.save()
 
-        console.log(newDisease)
+        //console.log(newDisease)
         req.flash('success_msg', 'Sucessfully uploaded disease details.')
         return res.redirect('/user/profile')
     } catch (err) {
@@ -219,7 +219,7 @@ module.exports.disease_get=async(req,res)=>{
 module.exports.profile_get = async (req, res) => {
     //res.locals.user = req.user
     res.locals.user = await req.user.populate('disease').execPopulate()
-    console.log("locals",res.locals.user)
+    //console.log("locals",res.locals.user)
     res.render('./userViews/profile')
 }
 
