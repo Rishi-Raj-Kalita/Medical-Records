@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
         console.log("in multer")
         const userEmail = req.user.email
         const dir = `./public/uploads/${userEmail}`
-        console.log("dir",dir)
+        console.log("dir",file)
         if (!fs.existsSync(dir)) {
            // console.log("making files")
             fs.mkdirSync(dir, { recursive: true }, (err) => {
